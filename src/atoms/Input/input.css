@@ -1,0 +1,15 @@
+::placeholder {
+  font-size: 12px;
+}
+
+input {
+  font-size: 12px;
+  border: 1px solid #aaaaaa;
+  border-radius: 4px;
+  padding: 3px 6px;
+  outline: none;
+}
+
+input:focus {
+  border: 1px solid #444;
+}

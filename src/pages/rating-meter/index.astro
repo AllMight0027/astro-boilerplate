@@ -1,0 +1,12 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import RatingMeterListing from "../../templates/RatingMeterListing";
+import { modifyRatingMetersList } from "../../utils/ratingMeterUtil";
+import { ratingMeterList } from "../../../fakeData";
+
+const rows = modifyRatingMetersList(ratingMeterList);
+---
+
+<Layout title="Welcome to Astro.">
+  <RatingMeterListing rows={rows} client:load />
+</Layout>
