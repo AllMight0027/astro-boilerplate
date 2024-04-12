@@ -16,7 +16,7 @@ const Table = (props: Props) => {
       </thead>
       <tbody>
         {props.rows.length > 0 ? (
-          props.rows.map((row) => <TableRow row={row} />)
+          props.rows.map((row, i) => <TableRow key={i} row={row} />)
         ) : (
           <TableRow
             row={[

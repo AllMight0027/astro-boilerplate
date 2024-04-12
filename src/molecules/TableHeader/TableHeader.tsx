@@ -8,8 +8,8 @@ export type TableHeaderProps = {
 const TableHeader = ({ headings }: TableHeaderProps) => {
   return (
     <tr className="divide-x divide-slate-300">
-      {headings.map((args) => (
-        <TableHead {...args} />
+      {headings.map((args, i) => (
+        <TableHead key={`${args.label}-${i}`} {...args} />
       ))}
     </tr>
   );

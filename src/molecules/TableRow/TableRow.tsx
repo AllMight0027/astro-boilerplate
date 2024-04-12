@@ -8,8 +8,8 @@ type Props = {
 const TableRow = ({ row }: Props) => {
   return (
     <tr className="even:bg-slate-50">
-      {row.map((args) => (
-        <TableData {...args} />
+      {row.map((args, i) => (
+        <TableData key={`${args.label}-${i}`} {...args} />
       ))}
     </tr>
   );
