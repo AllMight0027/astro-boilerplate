@@ -25,6 +25,7 @@ const RatingMeterListing = (props: Props) => {
               a.href = "/rating-meter/new";
               a.click();
             },
+            testId: "new-meter-btn",
           },
         ]}
         text={`${props.rows.length} Rating Meters • Sorted by Name • Updated few seconds ago`}

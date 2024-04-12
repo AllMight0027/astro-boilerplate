@@ -19,6 +19,7 @@ export interface ButtonProps {
    */
   children?: string;
   label?: string;
+  testId?: string;
   /**
    * Optional click handler
    */
@@ -35,6 +36,7 @@ export const Button = ({
   children,
   label,
   outlined,
+  testId,
   ...props
 }: ButtonProps) => {
   const mode = outlined
@@ -49,6 +51,7 @@ export const Button = ({
         " ",
       )}
       style={{ backgroundColor }}
+      {...(testId && { "data-testid": testId })}
       {...props}
     >
       {label ? label : children}

@@ -7,7 +7,9 @@ type Props = {
 const ButtonGroup = ({ buttons }: Props) => {
   return (
     <div className="flex items-center gap-x-2">
-      {buttons?.map((args) => <Button {...args} />)}
+      {buttons?.map((args, i) => (
+        <Button key={`${args.label}-${i}`} {...args} />
+      ))}
     </div>
   );
 };
