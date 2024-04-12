@@ -11,7 +11,7 @@
     "storybook": "concurrently 'yarn:watch:*'",
     "build-storybook": "storybook build",
     "watch:storybook": "storybook dev -p 6006",
-    "watch:tailwind": "npx tailwind -i ./src/tailwind-input.css -o ./public/tailwind.css --watch"
+    "watch:tailwind": "npx tailwind -i ./src/tailwind-input.css -o ./tailwind.css --watch"
   },
   "dependencies": {
     "@astrojs/check": "^0.5.6",
