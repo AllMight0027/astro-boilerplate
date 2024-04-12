@@ -16,7 +16,8 @@
     "lint": "eslint . --fix --max-warnings=0",
     "format": "prettier . --write",
     "test": "jest --watch",
-    "test:ci": "jest --ci"
+    "test:ci": "jest --ci",
+    "cypress": "cypress open"
   },
   "husky": {
     "hooks": {
