@@ -1,10 +1,13 @@
+import { useState } from "react";
 import ButtonGroup from "../molecules/ButtonGroup/ButtonGroup";
 import InfoText from "../molecules/InfoText/InfoText";
 import InputGroup from "../molecules/InputGroup/InputGroup";
 import Header from "../organism/Header/Header";
 import Table from "../organism/Table/Table";
+import type { TableDataProps } from "../atoms/TableData/TableData";
 
 const RatingForm = () => {
+  const [rows, setRows] = useState([] as TableDataProps[][]);
   return (
     <div>
       <Header
@@ -51,6 +54,18 @@ const RatingForm = () => {
                   {
                     label: "Add",
                     outlined: true,
+                    onClick: () => {
+                      setRows([
+                        ...rows,
+                        [
+                          { label: "Distance", align: "center" },
+                          { label: "Number" },
+                          { label: "No" },
+                          { label: "10" },
+                          { label: "-" },
+                        ],
+                      ]);
+                    },
                   },
                 ]}
               />
@@ -82,7 +97,7 @@ const RatingForm = () => {
                   infoText: "info",
                 },
               ]}
-              rows={[]}
+              rows={rows}
             />
           </div>
           <br />
