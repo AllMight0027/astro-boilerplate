@@ -6,7 +6,7 @@ test("open new rating form", async ({ page }) => {
     page.getByRole("button").and(page.getByText("New")),
   ).toBeVisible();
   await page.getByRole("button").and(page.getByText("New")).click();
-  await page.waitForTimeout(5000);
+  await page.waitForTimeout(2000);
   await page.waitForURL("**/new");
   await expect(page.getByText("Editing Rating Meter")).toBeVisible();
 });
