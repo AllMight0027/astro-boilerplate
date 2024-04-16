@@ -21,3 +21,7 @@ pnpm-debug.log*
 .DS_Store
 
 *storybook.log
+/test-results/
+/playwright-report/
+/blob-report/
+/playwright/.cache/

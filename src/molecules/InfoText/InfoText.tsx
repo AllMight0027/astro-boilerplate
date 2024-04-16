@@ -4,11 +4,11 @@ export type InfoTextProps = TextProps & {
   infoText?: string;
 };
 
-const InfoText = (props: InfoTextProps) => {
+const InfoText = ({ infoText, ...props }: InfoTextProps) => {
   return (
-    <div className="flex items-center gap-x-1 w-fit">
+    <div className="flex w-fit items-center gap-x-1">
       <Text {...props} />
-      {props.infoText && (
+      {infoText && (
         <img
           width="16"
           height="16"
