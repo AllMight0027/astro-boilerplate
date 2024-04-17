@@ -1,12 +1,11 @@
 ---
 import Layout from "../../layouts/Layout.astro";
 import RatingMeterListing from "../../templates/RatingMeterListing";
-import { modifyRatingMetersList } from "../../utils/ratingMeterUtil";
-import { ratingMeterList } from "../../../fakeData";
+import { fetchRatingMeters } from "../../stores/ratingMeters/actions";
 
 // const response = await fetch("https://api.continuous.tech/v1/ratingMeters");
 // const data = await response.json();
-const rows = modifyRatingMetersList(ratingMeterList);
+const rows = fetchRatingMeters();
 ---
 
 <Layout title="Welcome to Astro.">
