@@ -1,12 +1,8 @@
 import useRatingMeters from ".";
+import type { Action } from "../store";
 import { ADD_RATING_METER, DELETE_RATING_METER } from "./types";
 
-type Action = {
-  type: string;
-  payload?: any;
-};
-
-export const ratingMeterModifier = (action: Action) => {
+export const ratingMeter = (action: Action) => {
   const $ratingMeterStore = useRatingMeters();
   const state = $ratingMeterStore.get();
 
@@ -23,8 +19,8 @@ export const ratingMeterModifier = (action: Action) => {
           rows: [...state.rows.filter((_, i) => i !== action.payload)],
         };
       default:
-        return state;
+        return null;
     }
   })();
-  $ratingMeterStore.set(newState);
+  if (newState) $ratingMeterStore.set(newState);
 };

@@ -1,8 +1,8 @@
 import type { TableDataProps } from "../../atoms/TableData/TableData";
 import { modifyRatingMetersList } from "../../utils/ratingMeterUtil";
 import { ratingMeterList } from "../../../fakeData";
-import { ratingMeterModifier } from "./modifier";
 import { ADD_RATING_METER, DELETE_RATING_METER } from "./types";
+import { dispatch } from "../store";
 
 export function fetchRatingMeters() {
   const rows: TableDataProps[][] = modifyRatingMetersList(ratingMeterList);
@@ -18,7 +18,7 @@ export function addRatingMeters() {
     status: "Inactive",
   };
 
-  ratingMeterModifier({
+  dispatch({
     type: ADD_RATING_METER,
     payload: modifyRatingMetersList([res]),
   });
@@ -26,7 +26,7 @@ export function addRatingMeters() {
 
 export function deleteRatingMeters(index: number) {
   //API_CALL
-  ratingMeterModifier({
+  dispatch({
     type: DELETE_RATING_METER,
     payload: index,
   });
