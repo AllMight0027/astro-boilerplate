@@ -18,6 +18,4 @@
     "jsxImportSource": "react",
     "types": ["@testing-library/react", "@testing-library/jest-dom"]
   },
-  "include": [ "**/*.ts", "**/*.tsx"],
-  "exclude": ["node_modules"]
 }

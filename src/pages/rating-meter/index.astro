@@ -6,6 +6,8 @@ import { fetchRatingMeters } from "../../stores/ratingMeters/actions";
 // const response = await fetch("https://api.continuous.tech/v1/ratingMeters");
 // const data = await response.json();
 const rows = fetchRatingMeters();
+const name = Astro.locals.user.name;
+console.log({ name });
 ---
 
 <Layout title="Welcome to Astro.">
