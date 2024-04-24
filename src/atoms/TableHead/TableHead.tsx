@@ -1,4 +1,3 @@
-import InfoText from "../../molecules/InfoText/InfoText";
 import { Text } from "../Text/Text";
 
 export type TableHeadProps = {
@@ -12,7 +11,6 @@ const TableHead = ({
   align = "left",
   label,
   width = "auto",
-  infoText,
 }: TableHeadProps) => {
   return (
     <th

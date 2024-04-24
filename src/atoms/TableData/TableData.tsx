@@ -1,5 +1,3 @@
-import { Text } from "../Text/Text";
-
 export type TableDataProps = {
   label: string | JSX.Element;
   align?: "left" | "right" | "center";

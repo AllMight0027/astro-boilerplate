@@ -3,8 +3,9 @@ WORKDIR /app
 
 COPY . .
 
-RUN npm install
-RUN npm run build
+RUN npm install -g pnpm
+RUN pnpm i
+RUN pnpm run build
 
 ENV PORT=4322
 EXPOSE 4322
