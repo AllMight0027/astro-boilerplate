@@ -4,7 +4,7 @@
   "version": "0.0.1",
   "scripts": {
     "dev": "astro dev",
-    "start": "PORT=4322 node ./dist/server/entry.mjs",
+    "start": "PORT=4322 node ./server.mjs",
     "build": "astro check && astro build",
     "preview": "astro preview",
     "astro": "astro",
@@ -26,6 +26,7 @@
     "@vanilla-extract/vite-plugin": "^4.0.7",
     "@vitejs/plugin-react": "^4.2.1",
     "astro": "^4.4.6",
+    "express": "^4.19.2",
     "nanostores": "^0.10.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",

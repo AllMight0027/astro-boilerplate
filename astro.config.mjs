@@ -8,7 +8,7 @@ export default defineConfig({
   integrations: [react(), tailwind()],
   output: "server",
   adapter: node({
-    mode: "standalone",
+    mode: "middleware",
   }),
   server: { host: true },
 });
