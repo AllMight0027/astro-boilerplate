@@ -1,7 +1,55 @@
 ---
 import Layout from "../layouts/Layout.astro";
+import ForecastChart from "../organism/Charts/ForecastChart";
+import ComposedChart from "../organism/Charts/ComposedChart";
+import PieChart from "../organism/Charts/PieChart";
+import { barData, barData2, pieData } from "../../fakeData";
 ---
 
 <Layout title="Welcome to Astro.">
   <a href="/rating-meter">Rating Meter</a>
+  <div class="p-8 flex justify-evenly">
+    <ForecastChart
+      data={barData}
+      bars={[
+        {
+          dataKey: "Forecast",
+          fill: "#91D6D6",
+          barSize: 80,
+          dashed: true,
+        },
+        {
+          dataKey: "Actual",
+          fill: "#AAEB7C",
+          barSize: 80,
+        },
+      ]}
+      lines={[{ dataKey: "Plan", type: "monotone", stroke: "#ff7300" }]}
+      yTickFormatter={(v) => `$${v}`}
+      yAxisUnit="K"
+      client:load
+    />
+    <ComposedChart
+      data={barData2}
+      bars={[
+        {
+          dataKey: "pv",
+          fill: "#91D6D6",
+        },
+      ]}
+      lines={[{ dataKey: "uv", type: "monotone", stroke: "#ff7300" }]}
+      areas={[
+        {
+          dataKey: "amt",
+          type: "monotone",
+          stroke: "#8884d8",
+          fill: "#8884d8",
+        },
+      ]}
+      client:load
+    />
+  </div>
+  <div class="flex justify-center mt-4">
+    <PieChart data={pieData} client:load />
+  </div>
 </Layout>
