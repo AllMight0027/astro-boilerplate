@@ -94,58 +94,68 @@ export const pieData = [
 
 export const makeData = (numberOfRows) =>
   [...Array(numberOfRows).fill(null)].map(() => ({
-    firstName: {
-      value: faker.person.firstName(),
-      locked: faker.datatype.boolean(),
+    usageId: {
+      value: faker.number.int(),
+      locked: true,
     },
-    middleName: {
-      value: faker.person.firstName(),
-      locked: faker.datatype.boolean(),
+    transactionId: {
+      value: faker.number.int(),
+      locked: true,
     },
-    lastName: {
-      value: faker.person.lastName(),
-      locked: faker.datatype.boolean(),
+    consultationId: {
+      value: faker.number.int(),
+      locked: true,
     },
-    email: { value: faker.internet.email(), locked: faker.datatype.boolean() },
-    phoneNumber: {
-      value: faker.phone.number(),
-      locked: faker.datatype.boolean(),
+    consultationParticipantId: {
+      value: faker.number.int(),
+      locked: true,
     },
-    address: {
-      value: faker.location.streetAddress(),
-      locked: faker.datatype.boolean(),
+    projectId: {
+      value: faker.number.int(),
+      locked: true,
     },
-    zipCode: {
-      value: faker.location.zipCode(),
-      locked: faker.datatype.boolean(),
+    projectCode: {
+      value: faker.word.interjection(),
+      locked: true,
     },
-    city: { value: faker.location.city(), locked: faker.datatype.boolean() },
-    state: { value: faker.location.state(), locked: faker.datatype.boolean() },
-    country: {
-      value: faker.location.country(),
-      locked: faker.datatype.boolean(),
-    },
-    petName: { value: faker.animal.cat(), locked: faker.datatype.boolean() },
-    age: {
-      value: faker.number.float({ min: 0, max: 100 }),
-      locked: faker.datatype.boolean(),
-    },
-    salary: {
-      value: faker.number
-        .float({ min: 0, max: 1000000 })
-        .toLocaleString("en-US", {
-          style: "currency",
-          currency: "USD",
-        }),
-      locked: faker.datatype.boolean(),
-    },
-    dateOfBirth: {
-      value: faker.date.past({ years: 50 }).toDateString(),
-      locked: faker.datatype.boolean(),
-    },
-    dateOfJoining: {
+    effectiveDate: {
       value: faker.date.past({ years: 20 }).toDateString(),
       locked: faker.datatype.boolean(),
+    },
+    startDate: {
+      value: faker.date.past({ years: 20 }).toDateString(),
+      locked: faker.datatype.boolean(),
+    },
+    accountId: {
+      value: faker.number.int(),
+      locked: true,
+    },
+    featureCode: {
+      value: faker.word.interjection(),
+    },
+    quantity: {
+      value: faker.number.int(100),
+    },
+    nmId: {
+      value: faker.number.int(),
+      locked: true,
+    },
+    keyExecutive: {
+      value: faker.person.firstName(),
+    },
+    nmRate: {
+      value: faker.number.int(100),
+    },
+    clientContactId: {
+      value: faker.number.int(),
+      locked: true,
+    },
+    clientContactCountry: {
+      value: faker.location.country(),
+      locked: true,
+    },
+    callMinutes: {
+      value: faker.number.int(100),
     },
   }));
 

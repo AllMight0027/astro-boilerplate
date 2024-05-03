@@ -17,4 +17,5 @@ input:focus {
 input:disabled {
   border: 1px solid #ddd;
   cursor: not-allowed;
+  background: rgb(243 244 246);
 }

@@ -29,7 +29,7 @@ import { barData, barData2, pieData } from "../../fakeData";
       lines={[{ dataKey: "Plan", type: "monotone", stroke: "#ff7300" }]}
       yTickFormatter={(v) => `$${v}`}
       yAxisUnit="K"
-      client:only="react"
+      client:load
     />
     <ComposedChart
       data={barData2}
@@ -48,10 +48,10 @@ import { barData, barData2, pieData } from "../../fakeData";
           fill: "#8884d8",
         },
       ]}
-      client:only="react"
+      client:load
     />
   </div>
   <div class="flex justify-center mt-4">
-    <PieChart data={pieData} client:only="react" />
+    <PieChart data={pieData} client:load />
   </div>
 </Layout>

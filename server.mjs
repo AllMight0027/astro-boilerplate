@@ -6,5 +6,4 @@ const app = express();
 const base = "/";
 app.use(base, express.static("dist/client/"));
 app.use(ssrHandler);
-
 app.listen(8080);
