@@ -93,7 +93,7 @@ export const pieData = [
 ];
 
 export const makeData = (numberOfRows) =>
-  [...Array(numberOfRows).fill(null)].map((_, i) => ({
+  [...Array(numberOfRows).fill(null)].map(() => ({
     firstName: {
       value: faker.person.firstName(),
       locked: faker.datatype.boolean(),

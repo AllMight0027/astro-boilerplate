@@ -12,7 +12,7 @@ const PieChart = ({ data }: Props) => {
   const onPieEnter: (data: any, index: number) => void = (_, index) => {
     setActiveIndex(index);
   };
-  const onPieExit: (data: any, index: number) => void = (_, index) => {
+  const onPieExit: () => void = () => {
     setActiveIndex(-1);
   };
 

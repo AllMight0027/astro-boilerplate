@@ -5,7 +5,7 @@
   "scripts": {
     "dev": "astro dev",
     "start": "PORT=4322 node ./server.mjs",
-    "build": "astro check && astro build",
+    "build": "rm -rf ./dist && astro check && astro build",
     "preview": "astro preview",
     "astro": "astro",
     "storybook": "concurrently 'yarn:watch:*'",
