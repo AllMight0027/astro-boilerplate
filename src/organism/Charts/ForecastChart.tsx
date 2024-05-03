@@ -7,7 +7,6 @@ import {
   CartesianGrid,
   Tooltip,
   Legend,
-  Area,
   Line,
 } from "recharts";
 import type { CurveType } from "recharts/types/shape/Curve";

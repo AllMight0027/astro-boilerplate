@@ -1,5 +1,4 @@
 import { deepMap, type DeepMapStore } from "nanostores";
-import type { TableDataProps } from "../../atoms/TableData/TableData";
 
 export type RMStoreProps = {
   rows: any[];

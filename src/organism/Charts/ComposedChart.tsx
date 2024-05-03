@@ -1,4 +1,3 @@
-import type { FunctionComponent } from "react";
 import {
   ComposedChart as ComposedChartComponent,
   Bar,

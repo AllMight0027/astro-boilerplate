@@ -11,7 +11,7 @@ import { Button } from "../../atoms/Button/Button";
 
 type TableFormProps = {
   list: any[];
-  setList: ([]) => void;
+  setList: (list: any[]) => void;
 };
 
 const TableForm = ({ list, setList }: TableFormProps) => {
