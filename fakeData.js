@@ -1,3 +1,5 @@
+import { faker } from "@faker-js/faker";
+
 export const ratingMeterList = [
   {
     name: "GCP Usages",
@@ -89,3 +91,66 @@ export const pieData = [
   { name: "Group C", value: 300 },
   { name: "Group D", value: 200 },
 ];
+
+export const makeData = (numberOfRows) =>
+  [...Array(numberOfRows).fill(null)].map((_, i) => ({
+    firstName: {
+      value: faker.person.firstName(),
+      locked: faker.datatype.boolean(),
+    },
+    middleName: {
+      value: faker.person.firstName(),
+      locked: faker.datatype.boolean(),
+    },
+    lastName: {
+      value: faker.person.lastName(),
+      locked: faker.datatype.boolean(),
+    },
+    email: { value: faker.internet.email(), locked: faker.datatype.boolean() },
+    phoneNumber: {
+      value: faker.phone.number(),
+      locked: faker.datatype.boolean(),
+    },
+    address: {
+      value: faker.location.streetAddress(),
+      locked: faker.datatype.boolean(),
+    },
+    zipCode: {
+      value: faker.location.zipCode(),
+      locked: faker.datatype.boolean(),
+    },
+    city: { value: faker.location.city(), locked: faker.datatype.boolean() },
+    state: { value: faker.location.state(), locked: faker.datatype.boolean() },
+    country: {
+      value: faker.location.country(),
+      locked: faker.datatype.boolean(),
+    },
+    petName: { value: faker.animal.cat(), locked: faker.datatype.boolean() },
+    age: {
+      value: faker.number.float({ min: 0, max: 100 }),
+      locked: faker.datatype.boolean(),
+    },
+    salary: {
+      value: faker.number
+        .float({ min: 0, max: 1000000 })
+        .toLocaleString("en-US", {
+          style: "currency",
+          currency: "USD",
+        }),
+      locked: faker.datatype.boolean(),
+    },
+    dateOfBirth: {
+      value: faker.date.past({ years: 50 }).toDateString(),
+      locked: faker.datatype.boolean(),
+    },
+    dateOfJoining: {
+      value: faker.date.past({ years: 20 }).toDateString(),
+      locked: faker.datatype.boolean(),
+    },
+  }));
+
+export const camel2title = (camelCase) =>
+  camelCase
+    .replace(/([A-Z])/g, (match) => ` ${match}`)
+    .replace(/^./, (match) => match.toUpperCase())
+    .trim();

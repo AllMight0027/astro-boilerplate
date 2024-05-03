@@ -6,6 +6,7 @@ export type InputProps = {
   placeholder?: string;
   style?: React.CSSProperties;
   width?: string;
+  disabled?: boolean;
 };
 
 export const Input = ({
@@ -14,6 +15,7 @@ export const Input = ({
   placeholder,
   style = {},
   width = "280px",
+  disabled,
   ...props
 }: InputProps) => {
   return (
@@ -25,6 +27,7 @@ export const Input = ({
       }}
       placeholder={placeholder}
       onChange={onChange}
+      disabled={disabled}
       {...props}
     />
   );

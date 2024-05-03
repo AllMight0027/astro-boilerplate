@@ -13,3 +13,8 @@ input {
 input:focus {
   border: 1px solid #444;
 }
+
+input:disabled {
+  border: 1px solid #ddd;
+  cursor: not-allowed;
+}

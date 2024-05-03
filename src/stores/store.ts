@@ -1,4 +1,5 @@
 import { ratingMeter } from "./ratingMeters/modifier";
+import { table } from "./table/modifier";
 
 export type Action = {
   type: string;
@@ -10,7 +11,7 @@ type Modifier = {
   [key: string]: any;
 };
 
-const modifiers: Modifier = { ratingMeter };
+const modifiers: Modifier = { ratingMeter, table };
 
 export const dispatch = ({ modifier = "all", ...action }: Action) => {
   Object.keys(modifiers)

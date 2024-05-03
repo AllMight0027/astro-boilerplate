@@ -1,0 +1,15 @@
+---
+import Layout from "../layouts/Layout.astro";
+import TablePage from "../templates/TablePage";
+import { makeData } from "../../fakeData";
+import { fetchTableRows } from "../stores/table/actions";
+
+const rows = fetchTableRows();
+---
+
+<Layout title="Welcome to Astro.">
+  <div class="p-6">
+    <a href="/">Home</a>
+    <TablePage rows={rows} client:load />
+  </div>
+</Layout>
