@@ -3,7 +3,7 @@ import { SET_TABLE_ROWS } from "./types";
 import { dispatch } from "../store";
 
 export function fetchTableRows() {
-  const rows: any[] = makeData(500);
+  const rows: any[] = makeData(100);
   return rows;
 }
 

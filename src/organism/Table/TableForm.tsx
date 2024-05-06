@@ -1,4 +1,4 @@
-import { useMemo, useRef, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { camel2title } from "../../../fakeData";
 import { Input, type InputProps } from "../../atoms/Input/Input";
 import { Button } from "../../atoms/Button/Button";
@@ -12,14 +12,17 @@ import {
 } from "@tanstack/react-table";
 
 import { useVirtualizer } from "@tanstack/react-virtual";
+import Toggle from "../../atoms/Toggle/Toggle";
 
 type TableFormProps = {
   list: any[];
   setList: (list: any[]) => void;
+  data: any[];
+  setData: React.Dispatch<React.SetStateAction<any[]>>;
 };
 
-const TableForm = ({ list, setList }: TableFormProps) => {
-  const [data, setData] = useState<any[]>(list);
+const TableForm = ({ list, setList, data, setData }: TableFormProps) => {
+  const [excelCss, toggleExcelCss] = useState(true);
 
   const columns = useMemo<ColumnDef<any>[]>(
     () =>
@@ -38,6 +41,7 @@ const TableForm = ({ list, setList }: TableFormProps) => {
             return (
               <TableFormInput
                 value={cellData.value}
+                excelCss={excelCss}
                 onChange={(e) => {
                   setData((data) => {
                     const newList = JSON.parse(JSON.stringify(data));
@@ -60,7 +64,7 @@ const TableForm = ({ list, setList }: TableFormProps) => {
           },
         };
       }),
-    [],
+    [excelCss],
   );
 
   const table = useReactTable({
@@ -167,6 +171,7 @@ const TableForm = ({ list, setList }: TableFormProps) => {
               height: `${rowVirtualizer.getTotalSize()}px`, //tells scrollbar how big the table is
               position: "relative", //needed for absolute positioning of rows
             }}
+            className={excelCss ? "divide-y divide-slate-300" : ""}
           >
             {virtualRows.map((virtualRow) => {
               const row = rows[virtualRow.index] as Row<any[]>;
@@ -177,7 +182,9 @@ const TableForm = ({ list, setList }: TableFormProps) => {
                   data-index={virtualRow.index} //needed for dynamic row height measurement
                   ref={(node) => rowVirtualizer.measureElement(node)} //measure dynamic row height
                   key={row.id}
-                  className="even:bg-slate-50"
+                  className={
+                    excelCss ? "divide-x divide-slate-300" : "even:bg-slate-50"
+                  }
                   style={{
                     display: "flex",
                     position: "absolute",
@@ -194,7 +201,11 @@ const TableForm = ({ list, setList }: TableFormProps) => {
                     const cell = visibleCells[vc.index];
                     return (
                       <td
-                        className="flex px-2 py-3 text-xs"
+                        className={
+                          excelCss
+                            ? "flex p-0 text-xs"
+                            : "flex px-2 py-3 text-xs"
+                        }
                         key={cell.id}
                         style={{
                           width: cell.column.getSize(),
@@ -219,13 +230,20 @@ const TableForm = ({ list, setList }: TableFormProps) => {
           </tbody>
         </table>
       </div>
-      <div className="mt-4 flex gap-2">
-        <Button outlined onClick={() => setData(list)}>
-          Reset
-        </Button>
-        <Button primary onClick={() => setList(data)}>
-          Save
-        </Button>
+      <div className="flex items-center justify-between">
+        <Toggle
+          checked={excelCss}
+          onChange={(e) => toggleExcelCss(e.target.checked)}
+          label="Excel View"
+        />
+        <div className="mt-4 flex w-full justify-end gap-2">
+          <Button outlined onClick={() => setData(list)}>
+            Reset
+          </Button>
+          <Button primary onClick={() => setList(data)}>
+            Save
+          </Button>
+        </div>
       </div>
     </>
   );
@@ -238,13 +256,19 @@ const TableFormInput = ({
   onChange,
   disabled,
   onUnlock,
-}: InputProps & { onUnlock: () => void }) => {
+  excelCss,
+}: InputProps & { onUnlock: () => void; excelCss: boolean }) => {
   return (
     <div className="relative flex w-full">
-      <Input value={value} onChange={onChange} disabled={disabled} />
+      <Input
+        className={excelCss ? "!border-none !px-2 !py-3" : ""}
+        value={value}
+        onChange={onChange}
+        disabled={disabled}
+      />
       {disabled && (
         <span
-          className="absolute right-1 top-1 cursor-pointer bg-gray-100 pl-1"
+          className="absolute right-1 top-1/2 -translate-y-1/2 cursor-pointer bg-gray-100 pl-1"
           onClick={onUnlock}
         >
           &#128274;

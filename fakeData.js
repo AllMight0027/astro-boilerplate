@@ -96,27 +96,37 @@ export const makeData = (numberOfRows) =>
   [...Array(numberOfRows).fill(null)].map(() => ({
     usageId: {
       value: faker.number.int(),
-      locked: true,
+      locked: faker.datatype.boolean(),
+    },
+    accountId: {
+      value: faker.number.int(),
+      locked: faker.datatype.boolean(),
     },
     transactionId: {
       value: faker.number.int(),
-      locked: true,
+      locked: faker.datatype.boolean(),
+    },
+    callMinutes: {
+      value: faker.number.int(100),
+    },
+    quantity: {
+      value: faker.number.int(100),
     },
     consultationId: {
       value: faker.number.int(),
-      locked: true,
+      locked: faker.datatype.boolean(),
     },
     consultationParticipantId: {
       value: faker.number.int(),
-      locked: true,
+      locked: faker.datatype.boolean(),
     },
     projectId: {
       value: faker.number.int(),
-      locked: true,
+      locked: faker.datatype.boolean(),
     },
     projectCode: {
       value: faker.word.interjection(),
-      locked: true,
+      locked: faker.datatype.boolean(),
     },
     effectiveDate: {
       value: faker.date.past({ years: 20 }).toDateString(),
@@ -126,19 +136,13 @@ export const makeData = (numberOfRows) =>
       value: faker.date.past({ years: 20 }).toDateString(),
       locked: faker.datatype.boolean(),
     },
-    accountId: {
-      value: faker.number.int(),
-      locked: true,
-    },
+
     featureCode: {
       value: faker.word.interjection(),
     },
-    quantity: {
-      value: faker.number.int(100),
-    },
     nmId: {
       value: faker.number.int(),
-      locked: true,
+      locked: faker.datatype.boolean(),
     },
     keyExecutive: {
       value: faker.person.firstName(),
@@ -148,14 +152,11 @@ export const makeData = (numberOfRows) =>
     },
     clientContactId: {
       value: faker.number.int(),
-      locked: true,
+      locked: faker.datatype.boolean(),
     },
     clientContactCountry: {
       value: faker.location.country(),
-      locked: true,
-    },
-    callMinutes: {
-      value: faker.number.int(100),
+      locked: faker.datatype.boolean(),
     },
   }));
 

@@ -7,6 +7,7 @@ export type InputProps = {
   style?: React.CSSProperties;
   width?: string;
   disabled?: boolean;
+  className?: string;
 };
 
 export const Input = ({
@@ -16,7 +17,7 @@ export const Input = ({
   style = {},
   width = "280px",
   disabled,
-  ...props
+  className = "",
 }: InputProps) => {
   return (
     <input
@@ -25,10 +26,10 @@ export const Input = ({
         width,
         ...style,
       }}
+      className={className}
       placeholder={placeholder}
       onChange={onChange}
       disabled={disabled}
-      {...props}
     />
   );
 };
