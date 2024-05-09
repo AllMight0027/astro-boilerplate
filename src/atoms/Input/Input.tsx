@@ -3,6 +3,7 @@ import "./input.css";
 export type InputProps = {
   value?: string;
   onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  onBlur?: (e: React.ChangeEvent<HTMLInputElement>) => void;
   placeholder?: string;
   style?: React.CSSProperties;
   width?: string;
@@ -18,6 +19,7 @@ export const Input = ({
   width = "280px",
   disabled,
   className = "",
+  onBlur = () => {},
 }: InputProps) => {
   return (
     <input
@@ -30,6 +32,7 @@ export const Input = ({
       placeholder={placeholder}
       onChange={onChange}
       disabled={disabled}
+      onBlur={onBlur}
     />
   );
 };

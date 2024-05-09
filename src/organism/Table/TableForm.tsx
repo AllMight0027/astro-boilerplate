@@ -9,6 +9,8 @@ import {
   getSortedRowModel,
   type Row,
   useReactTable,
+  type SortingState,
+  type SortingFn,
 } from "@tanstack/react-table";
 
 import { useVirtualizer } from "@tanstack/react-virtual";
@@ -21,8 +23,24 @@ type TableFormProps = {
   setData: React.Dispatch<React.SetStateAction<any[]>>;
 };
 
+type TCellValue = {
+  value: string;
+  locked: boolean;
+};
+
+const sortFn: SortingFn<any> = (rowA, rowB, _columnId) => {
+  const rowAValue = rowA.getValue(_columnId) as TCellValue;
+  const rowBValue = rowB.getValue(_columnId) as TCellValue;
+  return rowAValue.value
+    .toString()
+    ?.localeCompare(rowBValue.value.toString(), "en", {
+      numeric: true,
+    });
+};
+
 const TableForm = ({ list, setList, data, setData }: TableFormProps) => {
   const [excelCss, toggleExcelCss] = useState(true);
+  const [sorting, setSorting] = useState<SortingState>([]);
 
   const columns = useMemo<ColumnDef<any>[]>(
     () =>
@@ -31,12 +49,8 @@ const TableForm = ({ list, setList, data, setData }: TableFormProps) => {
         return {
           accessorKey: c,
           header: title,
-          size: title.length * 7 > 180 ? title.length * 7 : 180,
+          size: title.length * 7 + 28 > 180 ? title.length * 7 + 28 : 180,
           cell: ({ cell }) => {
-            type TCellValue = {
-              value: string;
-              locked: boolean;
-            };
             const cellData = cell.getValue() as TCellValue;
             return (
               <TableFormInput
@@ -54,14 +68,33 @@ const TableForm = ({ list, setList, data, setData }: TableFormProps) => {
                 onUnlock={() => {
                   setData((data) => {
                     const newList = JSON.parse(JSON.stringify(data));
-                    newList[parseInt(cell.row.id)][cell.column.id].locked =
-                      false;
+                    if (newList[parseInt(cell.row.id)][cell.column.id].locked) {
+                      newList[parseInt(cell.row.id)][cell.column.id].locked =
+                        false;
+                      newList[parseInt(cell.row.id)][cell.column.id].wasLocked =
+                        true;
+                    }
+                    return newList;
+                  });
+                }}
+                onLock={() => {
+                  setData((data) => {
+                    const newList = JSON.parse(JSON.stringify(data));
+                    if (data[parseInt(cell.row.id)][cell.column.id].wasLocked) {
+                      newList[parseInt(cell.row.id)][cell.column.id].locked =
+                        true;
+                      delete newList[parseInt(cell.row.id)][cell.column.id]
+                        .wasLocked;
+                    }
                     return newList;
                   });
                 }}
               />
             );
           },
+          sortUndefined: "last",
+          sortDescFirst: false,
+          sortingFn: sortFn,
         };
       }),
     [excelCss],
@@ -72,6 +105,8 @@ const TableForm = ({ list, setList, data, setData }: TableFormProps) => {
     columns,
     getCoreRowModel: getCoreRowModel(),
     getSortedRowModel: getSortedRowModel(),
+    onSortingChange: setSorting,
+    state: { sorting },
   });
 
   const { rows } = table.getRowModel();
@@ -148,10 +183,27 @@ const TableForm = ({ list, setList, data, setData }: TableFormProps) => {
                         width: header.getSize(),
                       }}
                     >
-                      {flexRender(
-                        header.column.columnDef.header,
-                        header.getContext(),
-                      )}
+                      <div className="flex w-full items-center justify-between">
+                        {flexRender(
+                          header.column.columnDef.header,
+                          header.getContext(),
+                        )}
+                        <div
+                          className="flex cursor-pointer flex-col"
+                          onClick={header.column.getToggleSortingHandler()}
+                        >
+                          <img
+                            className="-mb-1 size-3"
+                            src={`https://img.icons8.com/ios-filled/100/${header.column.getIsSorted().valueOf() === "asc" ? "3274CC" : "000000"}/sort-up.png`}
+                            alt="sort-up"
+                          />
+                          <img
+                            className="size-3"
+                            src={`https://img.icons8.com/ios-filled/100/${header.column.getIsSorted().valueOf() === "desc" ? "3274CC" : "000000"}/sort-down.png`}
+                            alt="sort-up"
+                          />
+                        </div>
+                      </div>
                     </th>
                   );
                 })}
@@ -257,7 +309,12 @@ const TableFormInput = ({
   disabled,
   onUnlock,
   excelCss,
-}: InputProps & { onUnlock: () => void; excelCss: boolean }) => {
+  onLock,
+}: InputProps & {
+  onUnlock: () => void;
+  excelCss: boolean;
+  onLock: () => void;
+}) => {
   return (
     <div className="relative flex w-full">
       <Input
@@ -265,6 +322,7 @@ const TableFormInput = ({
         value={value}
         onChange={onChange}
         disabled={disabled}
+        onBlur={onLock}
       />
       {disabled && (
         <span
